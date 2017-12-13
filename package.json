@@ -14,14 +14,19 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
+    "axios": "^0.17.1",
     "font-awesome": "^4.7.0",
-    "jquery": "^3.2.1",
     "jslint": "^0.11.0",
+    "lodash": "^4.17.4",
+    "ts-loader": "^3.2.0",
+    "typescript": "^2.6.2",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuetify": "^0.17.4"
   },
   "devDependencies": {
+    "@types/jquery": "^3.2.16",
+    "@types/lodash": "^4.14.88",
     "autoprefixer": "^7.1.2",
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",

@@ -1,23 +1,59 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
+    <v-app>
+      <v-toolbar dense dark class="deep-orange darken-1">
+        <v-toolbar-title>
+          <v-toolbar-side-icon  @click.native="sideNav = !sideNav"
+                                class="hidden-sm-and-up">
+          </v-toolbar-side-icon>
+          <router-link to="/" tag="span" style="cursor: pointer">Jeux sur ma table</router-link>
+        </v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-xs-only" v-for="item in menuItems" :key="item.title">
+          <v-btn flat router :to="item.link">
+            <v-icon left>{{ item.icon }}</v-icon>
+            {{ item.title }}
+          </v-btn>
+        </v-toolbar-items>
+      </v-toolbar>
+
+      <v-navigation-drawer dark temporary absolute v-model="sideNav">
+        <v-list>
+          <v-list-tile v-for="item in menuItems" :key="item.title" router :to="item.link">
+            <v-list-tile-action>
+              <v-icon>{{ item.icon }}</v-icon>
+            </v-list-tile-action>
+            <v-list-tile-content>
+              {{ item.title }}
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+      </v-navigation-drawer>
+
+      <div>
+        <router-view></router-view>
+      </div>
+
+    </v-app>
 </template>
 
 <script>
 export default {
   name: 'app',
+  data() {
+    return {
+      sideNav: false,
+      menuItems: [
+        { icon: 'group_work', title: 'Groups', link: '/groups' },
+        { icon: 'motorcycle', title: 'Games', link: '/games' },
+        { icon: 'event', title: 'Events', link: '/events' },
+        { icon: 'face', title: 'Login', link: '/login' },
+        { icon: 'account_circle', title: 'Register', link: '/register' },
+      ],
+    };
+  },
 };
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+
 </style>
