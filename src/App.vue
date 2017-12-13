@@ -5,7 +5,9 @@
           <v-toolbar-side-icon  @click.native="sideNav = !sideNav"
                                 class="hidden-sm-and-up">
           </v-toolbar-side-icon>
-          <router-link to="/" tag="span" style="cursor: pointer">Jeux sur ma table</router-link>
+          <router-link to="/" tag="span" style="cursor: pointer">
+            Jeux sur ma table
+          </router-link>
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-toolbar-items class="hidden-xs-only" v-for="item in menuItems" :key="item.title">
@@ -37,18 +39,34 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import _ from 'lodash';
+
 export default {
   name: 'app',
+  computed: {
+    ...mapGetters([
+      'user',
+    ]),
+
+    menuItems() {
+      const items = [];
+      if (_.isEmpty(this.user.token)) {
+        items.push({ icon: 'face', title: 'Login', link: '/login' });
+        items.push({ icon: 'account_circle', title: 'Register', link: '/register' });
+      } else {
+        items.push({ icon: 'face', title: this.user.bggNick, link: '/profile' });
+        items.push({ icon: 'group_work', title: 'Groups', link: '/groups' });
+        items.push({ icon: 'motorcycle', title: 'Games', link: '/games' });
+        items.push({ icon: 'event', title: 'Events', link: '/events' });
+        items.push({ icon: 'lock_open', title: 'Log Off', link: '/logout' });
+      }
+      return items;
+    },
+  },
   data() {
     return {
       sideNav: false,
-      menuItems: [
-        { icon: 'group_work', title: 'Groups', link: '/groups' },
-        { icon: 'motorcycle', title: 'Games', link: '/games' },
-        { icon: 'event', title: 'Events', link: '/events' },
-        { icon: 'face', title: 'Login', link: '/login' },
-        { icon: 'account_circle', title: 'Register', link: '/register' },
-      ],
     };
   },
 };

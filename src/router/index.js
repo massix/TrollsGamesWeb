@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Vuetify from 'vuetify';
 
 import Home from '@/components/Home';
 import Login from '@/components/Login';
@@ -9,9 +8,10 @@ import Games from '@/components/Games';
 import Game from '@/components/Game';
 import Events from '@/components/Events';
 import Groups from '@/components/Groups';
+import GamesCheck from '@/components/GamesCheck';
+import Logout from '@/components/Logout';
 
 Vue.use(Router);
-Vue.use(Vuetify);
 
 export default new Router({
   routes: [
@@ -28,8 +28,18 @@ export default new Router({
       component: Register,
     },
     {
-      path: '/games',
+      name: 'games',
+      path: '/games/:activeUser/:activePage',
       component: Games,
+      props: true,
+    },
+    {
+      path: '/games/:activeUser',
+      redirect: '/games/:activeUser/1',
+    },
+    {
+      path: '/games',
+      component: GamesCheck,
     },
     {
       path: '/game/:id',
@@ -43,6 +53,10 @@ export default new Router({
     {
       path: '/events',
       component: Events,
+    },
+    {
+      path: '/logout',
+      component: Logout,
     },
   ],
 
