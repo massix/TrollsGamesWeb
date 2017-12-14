@@ -28,7 +28,7 @@ export default {
       searchQuery: '',
       games: [],
       searchRules: [
-        v => v.length >= 3 || 'At least 3 characters',
+        v => (v && v.length >= 3) || 'At least 3 characters',
       ],
     };
   },
@@ -40,15 +40,13 @@ export default {
   },
 
   created() {
-    //eslint-disable-next-line
-    console.log(`created with ${this.$route.query.q}`);
     this.searchQuery = this.$route.query.q;
   },
 
   watch: {
     searchQuery: _.debounce(function db() {
       this.searchDone = false;
-      if (this.searchQuery.length >= 3) {
+      if (!_.isEmpty(this.searchQuery) && this.searchQuery.length >= 3) {
         this.$router.push(`/search?q=${this.searchQuery}`);
         this.searchGame();
       } else {

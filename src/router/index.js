@@ -11,6 +11,7 @@ import Groups from '@/components/Groups';
 import GamesCheck from '@/components/GamesCheck';
 import GamesSearch from '@/components/GamesSearch';
 import Logout from '@/components/Logout';
+import Group from '@/components/Group';
 
 Vue.use(Router);
 
@@ -31,6 +32,7 @@ export default new Router({
     {
       name: 'games',
       path: '/games/:activeUser/:activePage',
+      alias: '/collection/:activeUser/:activePage',
       component: Games,
       props: true,
     },
@@ -55,6 +57,11 @@ export default new Router({
     {
       path: '/groups',
       component: Groups,
+    },
+    {
+      path: '/group/:id',
+      component: Group,
+      props: true,
     },
     {
       path: '/events',

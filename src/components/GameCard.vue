@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       displayInfo: [
-        { icon: 'fa-pencil', text: () => `Created by ${this.game.authors}` },
+        { icon: 'fa-pencil', text: () => this.game.authors },
         { icon: 'fa-clock-o', text: () => `${this.game.playingTime} minutes` },
         {
           icon: 'fa-user',
