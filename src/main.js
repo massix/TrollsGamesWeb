@@ -4,14 +4,19 @@ import 'font-awesome/css/font-awesome.min.css';
 import 'vuetify/dist/vuetify.css';
 import 'lodash';
 
+// My components
+import GameCard from '@/components/GameCard';
+
 import Vue from 'vue';
 import Vuetify from 'vuetify';
 import App from './App';
 import router from './router';
 import { store } from './store/store';
 
+
 Vue.config.productionTip = true;
 Vue.use(Vuetify);
+Vue.component('v-game-card', GameCard);
 
 /* eslint-disable no-new */
 new Vue({

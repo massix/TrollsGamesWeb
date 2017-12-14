@@ -5,10 +5,11 @@ import Home from '@/components/Home';
 import Login from '@/components/Login';
 import Register from '@/components/Register';
 import Games from '@/components/Games';
-import Game from '@/components/Game';
+import GameDetails from '@/components/GameDetails';
 import Events from '@/components/Events';
 import Groups from '@/components/Groups';
 import GamesCheck from '@/components/GamesCheck';
+import GamesSearch from '@/components/GamesSearch';
 import Logout from '@/components/Logout';
 
 Vue.use(Router);
@@ -42,8 +43,13 @@ export default new Router({
       component: GamesCheck,
     },
     {
+      path: '/search',
+      props: true,
+      component: GamesSearch,
+    },
+    {
       path: '/game/:id',
-      component: Game,
+      component: GameDetails,
       props: true,
     },
     {

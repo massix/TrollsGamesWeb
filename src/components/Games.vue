@@ -1,24 +1,15 @@
 <template>
   <v-container>
-      <v-layout row>
-        <v-flex xs12 sm6 offset-sm3>
-          <v-text-field name="search" prepend-icon="search" label="search" v-model="searchQuery">
 
-          </v-text-field>
+      <!-- <v-layout row>
+        <v-flex xs12 sm6 offset-sm3 class="mb-3">
+          <h1 class="display-2">Your collection</h1>
         </v-flex>
-      </v-layout>
+      </v-layout> -->
 
       <v-layout wrap>
-          <v-flex xs12 sm3 v-if="games" v-for="game in games" :key="game.id" class="mb-3 pr-3">
-              <v-card class="elevation-6">
-                  <v-card-media :src="game.thumbnail? game.thumbnail.replace('_t', '') : 'https://geekken.files.wordpress.com/2012/08/massiveboardgamecollection.jpeg'" height="150px"></v-card-media>
-                  <v-card-title primary-title><h3>{{ game.name }}</h3></v-card-title>
-                  <v-card-text>{{ game.authors }} - {{ game.yearPublished }}</v-card-text>
-                  <v-card-actions>
-                    <v-btn flat color="orange" router :to="'/game/' + game.id">Details</v-btn>
-                    <v-btn flat color="orange">View on BGG</v-btn>
-                  </v-card-actions>
-              </v-card>
+          <v-flex xs12 sm3 v-for="game in games" :key="game.id" class="mb-3 pr-3">
+            <v-game-card :game="game"></v-game-card>
           </v-flex>
       </v-layout>
 

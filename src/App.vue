@@ -57,7 +57,8 @@ export default {
       } else {
         items.push({ icon: 'face', title: this.user.bggNick, link: '/profile' });
         items.push({ icon: 'group_work', title: 'Groups', link: '/groups' });
-        items.push({ icon: 'motorcycle', title: 'Games', link: '/games' });
+        items.push({ icon: 'search', title: 'Search', link: '/search' });
+        items.push({ icon: 'pages', title: 'Your Games', link: '/games' });
         items.push({ icon: 'event', title: 'Events', link: '/events' });
         items.push({ icon: 'lock_open', title: 'Log Off', link: '/logout' });
       }
