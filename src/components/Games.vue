@@ -62,7 +62,7 @@ export default {
       });
     },
     totalPages() {
-      axios.get(`https://staging.massi.rocks/v1/collection/get/${this.activeUser}/page/total`).then((r) => {
+      axios.get(`${process.env.API_BASE}/v1/collection/get/${this.activeUser}/page/total`).then((r) => {
         this.pages = r.data.totalPages;
       });
     },
