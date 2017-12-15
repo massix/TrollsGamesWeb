@@ -14,8 +14,8 @@
     </v-card-text>
     <v-card-actions>
       <v-btn flat color="orange" router :to="'/game/' + game.id" icon><v-icon>search</v-icon></v-btn>
-      <v-btn flat color="orange" icon><v-icon>extension</v-icon></v-btn>
-      <v-btn flat color="orange" v-if="removable" @click="removeGame" icon><v-icon>delete</v-icon></v-btn>
+      <v-btn flat color="orange" icon :router="false" :href="`https://www.boardgamegeek.com/boardgame/${game.id}`" target="_blank"><v-icon>extension</v-icon></v-btn>
+      <v-btn flat color="orange" v-if="removable" @click="$emit('removeGame', game)" icon><v-icon>delete</v-icon></v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -42,12 +42,6 @@ export default {
         },
       ],
     };
-  },
-
-  methods: {
-    removeGame() {
-
-    },
   },
 };
 </script>

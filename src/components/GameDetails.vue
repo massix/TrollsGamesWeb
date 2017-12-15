@@ -31,7 +31,7 @@ export default {
   },
 
   created() {
-    axios.get(`https://prod.massi.rocks/v1/games/get/${this.id}`).then((r) => {
+    axios.get(`${process.env.API_BASE}/v1/games/get/${this.id}`).then((r) => {
       this.game = r.data;
     });
   },
