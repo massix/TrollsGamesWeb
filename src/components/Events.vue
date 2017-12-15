@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <p>The events page {{ serverUrl }}</p>
-    </div>
+  <div>
+    <p>The events page {{ serverUrl }}</p>
+  </div>
 </template>
 
 <script>

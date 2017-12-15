@@ -13,8 +13,9 @@
       </v-layout>
     </v-card-text>
     <v-card-actions>
-      <v-btn flat color="orange" router :to="'/game/' + game.id">Details</v-btn>
-      <v-btn flat color="orange">View on BGG</v-btn>
+      <v-btn flat color="orange" router :to="'/game/' + game.id" icon><v-icon>search</v-icon></v-btn>
+      <v-btn flat color="orange" icon><v-icon>extension</v-icon></v-btn>
+      <v-btn flat color="orange" v-if="removable" @click="removeGame" icon><v-icon>delete</v-icon></v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -22,7 +23,7 @@
 <script>
 export default {
   name: 'v-game-card',
-  props: ['game'],
+  props: ['game', 'removable'],
   data() {
     return {
       displayInfo: [
@@ -41,6 +42,12 @@ export default {
         },
       ],
     };
+  },
+
+  methods: {
+    removeGame() {
+
+    },
   },
 };
 </script>

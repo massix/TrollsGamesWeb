@@ -10,7 +10,7 @@
           </router-link>
         </v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-toolbar-items class="hidden-xs-only" v-for="item in menuItems" :key="item.title">
+        <v-toolbar-items class="hidden-xs-only" v-for="item in menuItems" :key="item.title" v-if="item.shouldShow()">
           <v-btn flat router :to="item.link">
             <v-icon left>{{ item.icon }}</v-icon>
             {{ item.title }}
@@ -52,15 +52,17 @@ export default {
     menuItems() {
       const items = [];
       if (_.isEmpty(this.user.token)) {
-        items.push({ icon: 'face', title: 'Login', link: '/login' });
-        items.push({ icon: 'account_circle', title: 'Register', link: '/register' });
+        items.push({ icon: 'face', title: 'Login', link: '/login', shouldShow: () => true });
+        items.push({ icon: 'account_circle', title: 'Register', link: '/register', shouldShow: () => true });
       } else {
-        items.push({ icon: 'face', title: this.user.bggNick, link: '/profile' });
-        items.push({ icon: 'group_work', title: 'Groups', link: '/groups' });
-        items.push({ icon: 'search', title: 'Search', link: '/search' });
-        items.push({ icon: 'pages', title: 'Your Games', link: '/games' });
-        items.push({ icon: 'event', title: 'Events', link: '/events' });
-        items.push({ icon: 'lock_open', title: 'Log Off', link: '/logout' });
+        items.push({ icon: 'face', title: this.user.bggNick, link: '/profile', shouldShow: () => true });
+        items.push({ icon: 'group_work', title: 'Groups', link: '/groups', shouldShow: () => true });
+        items.push({ icon: 'search', title: 'Search', link: '/search', shouldShow: () => true });
+        items.push({ icon: 'pages', title: 'Your Games', link: '/games', shouldShow: () => true });
+        //eslint-disable-next-line
+        // items.push({ icon: 'add', title: 'Manage games', link: '/manager', shouldShow: () => !this.user.bggHandled });
+        items.push({ icon: 'event', title: 'Events', link: '/events', shouldShow: () => true });
+        items.push({ icon: 'lock_open', title: 'Log Off', link: '/logout', shouldShow: () => true });
       }
       return items;
     },

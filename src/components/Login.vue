@@ -59,6 +59,7 @@ export default {
             bggNick: r.data.bggNick,
             forumNick: r.data.forumNick,
             email: r.data.email,
+            bggHandled: r.data.bggHandled,
             token: r.headers.authorization.replace('Bearer ', ''),
           });
 

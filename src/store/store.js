@@ -13,6 +13,7 @@ export const store = new Vuex.Store({
       email: '',
       bggNick: '',
       forumNick: '',
+      bggHandled: true,
     },
   },
   getters: {
@@ -24,6 +25,7 @@ export const store = new Vuex.Store({
       state.user.token = '';
       state.user.forumNick = '';
       state.user.email = '';
+      state.user.bggHandled = true;
     },
     logUser(state, user) {
       state.user = user;
