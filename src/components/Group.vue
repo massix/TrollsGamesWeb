@@ -10,11 +10,11 @@
       <v-flex xs12 sm4 class="pr-3 mb-2" v-for="member in members" :key="member.email">
         <v-card class="elevation-1">
           <v-card-title primary-title>
-            <v-icon left>account_circle</v-icon> &nbsp; {{ member.bggNick }}
+            <v-icon left>account_circle</v-icon> &nbsp; <strong>{{ member.forumNick | toUpperCase }}</strong>
           </v-card-title>
           <v-card-text class="caption">
             <v-icon left>email</v-icon> &nbsp; {{ member.email }} <br />
-            <v-icon left>forum</v-icon> &nbsp; {{ member.forumNick }}
+            <v-icon left>forum</v-icon> &nbsp; {{ member.bggNick }}
           </v-card-text>
           <v-card-actions>
             <v-btn flat color="orange darken-1" router :to="`/collection/${member.bggNick}/1`">View collection</v-btn>
@@ -27,9 +27,19 @@
 
 <script>
 import axios from 'axios';
+import * as _ from 'lodash';
 
 export default {
   props: ['id'],
+  filters: {
+    toUpperCase(value) {
+      if (!_.isEmpty(value)) {
+        return value.toUpperCase();
+      }
+
+      return value;
+    },
+  },
   data() {
     return {
       group: { id: 0, name: 'Trolls De Jeux', description: 'Association Trolls De Jeux sur Antibes' },
