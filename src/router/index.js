@@ -20,14 +20,17 @@ export default new Router({
     {
       path: '/',
       component: Home,
+      protected: true,
     },
     {
       path: '/login',
       component: Login,
+      protected: false,
     },
     {
       path: '/register',
       component: Register,
+      protected: false,
     },
     {
       name: 'games',
@@ -35,41 +38,50 @@ export default new Router({
       alias: '/collection/:activeUser/:activePage',
       component: Games,
       props: true,
+      protected: false,
     },
     {
       path: '/games/:activeUser',
       redirect: '/games/:activeUser/1',
+      protected: false,
     },
     {
       path: '/games',
       component: GamesCheck,
+      protected: true,
     },
     {
       path: '/search',
       props: true,
       component: GamesSearch,
+      protected: true,
     },
     {
       path: '/game/:id',
       component: GameDetails,
       props: true,
+      protected: false,
     },
     {
       path: '/groups',
       component: Groups,
+      protected: false,
     },
     {
       path: '/group/:id',
       component: Group,
       props: true,
+      protected: true,
     },
     {
       path: '/events',
       component: Events,
+      protected: true,
     },
     {
       path: '/logout',
       component: Logout,
+      protected: false,
     },
   ],
 
