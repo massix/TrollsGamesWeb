@@ -31,9 +31,7 @@
         </v-list>
       </v-navigation-drawer>
 
-      <div>
-        <router-view></router-view>
-      </div>
+      <router-view></router-view>
 
     </v-app>
 </template>

@@ -50,7 +50,7 @@ export default {
     submitLogin() {
       //eslint-disable-next-line
       this.loading = true;
-      axios.post('https://staging.massi.rocks/v1/users/login', {
+      axios.post(`${process.env.API_BASE}/v1/users/login`, {
         email: this.email,
         password: this.password,
       }).then((r) => {

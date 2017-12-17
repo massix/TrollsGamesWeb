@@ -38,8 +38,18 @@ const protectedRoutes = [
   '/profile',
 ];
 
+// Routes that should redirect to '/' because not yet implemented
+const notImplementedRoutes = [
+  '/profile',
+  '/events',
+];
+
 router.beforeEach((to, from, next) => {
   const user = v.$store.state.user;
+  if (_.indexOf(notImplementedRoutes, to.path) !== -1) {
+    next('/');
+  }
+
   if (_.indexOf(protectedRoutes, to.path) !== -1) {
     axios.get(`${process.env.API_BASE}/v1/users/get/${user.bggNick}/information`, {
       headers: {
