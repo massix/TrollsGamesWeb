@@ -67,6 +67,12 @@
       </v-flex>
     </v-layout>
 
+    <v-layout row>
+      <v-flex xs12 sm6 offset-sm3 class="mb-3">
+        <v-text-field v-model="filterQuery" label="Filter" append-icon="search"></v-text-field>
+      </v-flex>
+    </v-layout>
+
     <v-layout wrap>
         <v-flex xs12 sm3 v-for="game in games" :key="game.id" class="mb-3 pr-3">
           <v-game-card :game="game" :removable="canRemoveGame" @removeGame="removeGame"></v-game-card>
@@ -100,6 +106,7 @@ export default {
       successAlertText: '',
       errorAlertVisible: false,
       errorAlertText: '',
+      filterQuery: '',
       pagination: {
         sortBy: 'name',
       },
@@ -122,7 +129,7 @@ export default {
       return false;
     },
     shouldShowPaginator() {
-      return this.games.length > 0;
+      return this.games.length > 0 && _.isEmpty(this.filterQuery);
     },
     shouldShowTable() {
       return this.searchResult.length > 0;
@@ -150,6 +157,22 @@ export default {
         this.searchResult = [];
       }
     },
+    filterQuery: _.debounce(function debounced () {
+      console.log(`debouncing for ${this.filterQuery}`);
+      if (_.isEmpty(this.filterQuery)) {
+        this.totalPages();
+        this.retrieveAllGames();
+      } else {
+        axios.get(`${process.env.API_BASE}/v1/collection/search?query=${this.filterQuery}&user=${this.user.bggNick}`,
+          {
+            headers: {
+              authorization: `Bearer ${this.user.token}`,
+            },
+          }).then((r) => {
+            this.games = r.data;
+          });
+      }
+    }, 600)
   },
   created() {
     this.totalPages();
@@ -200,15 +223,17 @@ export default {
       });
     },
     removeGame(g) {
-      this.games = _.filter(this.games, game => game.id !== g.id);
-
       axios.delete(`${process.env.API_BASE}/v1/collection/remove/${this.user.bggNick}/${g.id}`, {
         headers: {
           authorization: `Bearer ${this.user.token}`,
         },
       }).then(() => {
-        this.totalPages();
-        this.retrieveAllGames();
+        if (_.isEmpty(this.filterQuery)) {
+          this.totalPages();
+          this.retrieveAllGames();
+        } else {
+          this.games = _.filter(this.games, game => game.id !== g.id);
+        }
         this.successAlertVisible = true;
         this.successAlertText = `${g.name} successfully removed from your collection!`;
       }).catch(() => {
