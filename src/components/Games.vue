@@ -157,8 +157,7 @@ export default {
         this.searchResult = [];
       }
     },
-    filterQuery: _.debounce(function debounced () {
-      console.log(`debouncing for ${this.filterQuery}`);
+    filterQuery: _.debounce(function debounced() {
       if (_.isEmpty(this.filterQuery)) {
         this.totalPages();
         this.retrieveAllGames();
@@ -172,7 +171,7 @@ export default {
             this.games = r.data;
           });
       }
-    }, 600)
+    }, 600),
   },
   created() {
     this.totalPages();
