@@ -162,7 +162,7 @@ export default {
         this.totalPages();
         this.retrieveAllGames();
       } else {
-        axios.get(`${process.env.API_BASE}/v1/collection/search?query=${this.filterQuery}&user=${this.user.bggNick}`,
+        axios.get(`${process.env.API_BASE}/v1/collection/search?query=${this.filterQuery}&user=${this.activeUser}`,
           {
             headers: {
               authorization: `Bearer ${this.user.token}`,
