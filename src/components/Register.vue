@@ -6,7 +6,7 @@
           {{ requestReturn }}
         </v-alert>
         <v-form v-model="valid" @submit.prevent="submitForm" :disabled="submitted">
-          <v-text-field label="Your user on BoardGameGeek" v-model="bggNick" :disabled="!bggHandled"></v-text-field>
+          <v-text-field label="Your user on BoardGameGeek (leave empty if you don't have one)" v-model="bggNick" :disabled="!bggHandled"></v-text-field>
           <v-text-field label="Name you want to show to others" v-model="forumNick" required></v-text-field>
           <v-text-field label="Your email address (must be valid)" v-model="email" required></v-text-field>
 
@@ -70,7 +70,7 @@ export default {
         //eslint-disable-next-line
         console.error('empty bgg nick and not handled');
         return;
-      } else if (_.isEmpty(this.bggNick && !this.bggHandled)) {
+      } else if (!this.bggHandled) {
         this.bggNick = this.forumNick;
       }
 
