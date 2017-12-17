@@ -32,15 +32,10 @@ export default {
 };
 </script>
 
+<style lang="stylus" scoped>
+.text
+  color lightslategray;
 
-<style scoped>
-.text {
-  color: lightslategray;
-}
-
-.author {
-  color: gray;
-}
+.author
+  color gray
 </style>
-
-

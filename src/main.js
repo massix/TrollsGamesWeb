@@ -48,6 +48,7 @@ router.beforeEach((to, from, next) => {
   const user = v.$store.state.user;
   if (_.indexOf(notImplementedRoutes, to.path) !== -1) {
     next('/');
+    return;
   }
 
   if (_.indexOf(protectedRoutes, to.path) !== -1) {
