@@ -21,11 +21,19 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'v-game-card',
   props: ['game', 'removable'],
+  created() {
+    axios.get(`${process.env.API_BASE}/v1/games/owners/${this.game.id}`).then((r) => {
+      this.owners = r.data;
+    });
+  },
   data() {
     return {
+      owners: [],
       displayInfo: [
         { icon: 'fa-pencil', text: () => this.game.authors },
         { icon: 'fa-clock-o', text: () => `${this.game.playingTime} minutes` },
@@ -38,6 +46,17 @@ export default {
 
             const followUp = this.game.maxPlayers > this.game.minPlayers ? `to ${this.game.maxPlayers}` : '';
             return `${this.game.minPlayers} ${followUp} players`;
+          },
+        },
+        {
+          icon: 'fa-user-circle',
+          text: () => {
+            if (this.owners.length > 1) {
+              return `${this.owners.length} members`;
+            } else if (this.owners.length === 1) {
+              return '1 member';
+            }
+            return 'No one has this game!';
           },
         },
       ],
